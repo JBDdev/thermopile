@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
-    
+    bool justStopped;
 
     Vector3 topSphere;
     Vector3 bottomSphere;
@@ -144,12 +144,21 @@ public class PlayerController : MonoBehaviour
 
             //rb.mass = 2f;
             //Apply drag force when input is released, but stop once we are good
-            
+
             if (rb.velocity.sqrMagnitude > deadzoneMinSpeed)
-                rb.AddForce(new Vector3(rb.velocity.x * -deccelerationFactor, 0, rb.velocity.z * -deccelerationFactor), ForceMode.Impulse);
+            {
+                if (justStopped && !coyoteCountStarted)
+                    rb.AddForce(new Vector3(rb.velocity.x * -deccelerationFactor, rb.velocity.y * -deccelerationFactor, rb.velocity.z * -deccelerationFactor), ForceMode.Impulse);
+                else
+                    rb.AddForce(new Vector3(rb.velocity.x * -deccelerationFactor, 0, rb.velocity.z * -deccelerationFactor), ForceMode.Impulse);
+
+            }
+
+            justStopped = false;
         }
         else 
         {
+            justStopped = true;
             rb.mass = 1f;
             Vector3 targetDirection = Vector3.zero;
             targetDirection += transform.forward * movementInput.y;

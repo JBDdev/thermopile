@@ -1681,7 +1681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: {fileID: -944628639613478452, guid: c9a4339bb17f2614086d01ed5bf8a70f, type: 3}
   accelerationFactor: 1
-  deccelerationFactor: 0.5
+  deccelerationFactor: 0.7
   maxSpeed: 10
   deadzone: 0
   deadzoneMinSpeed: 0.1
